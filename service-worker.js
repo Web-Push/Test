@@ -7,15 +7,26 @@ self.addEventListener('push', function(event) {
   var body = 'We have received a push message.';
   var icon = '/images/icon-192x192.png';
   var tag = 'simple-push-demo-notification-tag';
-
   event.waitUntil(
-    self.registration.showNotification(title, {
-      body: body,
-      icon: icon,
-      tag: tag
-    })
+    fetch('https://web-push.github.io/Test/fetch.php').then(function(response){
+      if (response.status !== 200) {
+        console.log('Looks like there was a problem. Status Code: ' + response.status);
+        throw new Error();
+      }
+      return response.json().then(function(data) {
+  
+        self.registration.showNotification(data.title, {
+          body: data.message,
+          icon: icon,
+          tag: tag
+        })
+  })
+  })
+
+
   );
 });
+
 
 self.addEventListener('notificationclick', function(event) {
   console.log('On notification click: ', event.notification.tag);
