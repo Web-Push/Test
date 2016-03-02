@@ -3,9 +3,8 @@
 self.addEventListener('push', function(event) {
   console.log('Received a push message', event);
 
-  data = event.data.json();
-  var title = data.title;
-  var body = data.message;
+  var title = 'Yay a message.';
+  var body = 'We have received a push message.';
   var icon = '/images/icon-192x192.png';
   var tag = 'simple-push-demo-notification-tag';
 
