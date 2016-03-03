@@ -45,6 +45,7 @@ limitations under the License.
     <!-- Include manifest file in the page -->
     <link rel="manifest" href="manifest.json">
 
+    <script type="text/javascript" src="js/KiiSDK.js"></script>
   </head>
 
   <body>
@@ -91,5 +92,14 @@ limitations under the License.
       /* jshint ignore:end */
     </script>
     <!-- Built with love using Web Starter Kit -->
+    <script type="text/javascript">
+      window.onload = function() {
+      // Must be initialized with your AppID, AppKey and SiteID
+      // before any other Kii SDK calls are made
+      Kii.initializeWithSite("5a2ac7b1", "1bc385a570612507bb8740ba861b14cb", KiiSite.JP);
+
+      // the rest of your javascript initialization
+      };
+    </script>
   </body>
 </html>
