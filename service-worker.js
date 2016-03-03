@@ -2,7 +2,11 @@
 
 self.addEventListener('push', function(event) {
   console.log('Received a push message', event);
-
+  
+  self.registration.pushManager.getSubscription().then(function(subscription) {
+    console.log("got subscription id: ", subscription.endpoint);
+    var subscriptionid = subscription.endpoint.split("/").slice(-1));
+  });
   var title = 'Yay a message.';
   var body = 'We have received a push message.';
   var icon = '/images/icon-192x192.png';
