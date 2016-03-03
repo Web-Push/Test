@@ -5,7 +5,7 @@ self.addEventListener('push', function(event) {
   
   self.registration.pushManager.getSubscription().then(function(subscription) {
     console.log("got subscription id: ", subscription.endpoint);
-    var subscriptionid = subscription.endpoint.split("/").slice(-1));
+    var subscriptionid = subscription.endpoint.split("/").slice(-1);
   });
   var title = 'Yay a message.';
   var body = 'We have received a push message.';
