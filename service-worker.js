@@ -13,12 +13,13 @@ self.addEventListener('push', function(event) {
   //  console.log("got subscription id: ", subscription.endpoint);
   //  var subscriptionid = subscription.endpoint.split("/").slice(-1);
   //});
-  getList();
+  
   var title = 'Yay a message.';
   var body = 'We have received a push message.';
   var icon = '/images/icon-192x192.png';
   var tag = 'simple-push-demo-notification-tag';
   event.waitUntil(
+    getList();
     fetch('https://web-push.github.io/Test/fetch.php').then(function(response){
       if (response.status !== 200) {
         console.log('Looks like there was a problem. Status Code: ' + response.status);
