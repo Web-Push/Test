@@ -98,8 +98,28 @@ limitations under the License.
       // before any other Kii SDK calls are made
       Kii.initializeWithSite("5a2ac7b1", "1bc385a570612507bb8740ba861b14cb", KiiSite.JP);
 
-      // the rest of your javascript initialization
+      registerUser();
       };
+      
+      function registerUser() {
+      // Create the KiiUser object
+        var user = KiiUser.userWithUsername(username, password);
+  
+        // Register the user, defining callbacks for when the process completes
+        user.register({
+        // Called on successful registration
+          success: function(theUser) {
+            // Print some info to the log
+            console.log("User registered!");
+            console.log(theUser);
+         },
+          // Called on a failed registration
+          failure: function(theUser, errorString) {
+            // Print some info to the log
+            console.log("Error registering: " + errorString);
+          }
+        });
+      }
     </script>
   </body>
 </html>
