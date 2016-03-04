@@ -1,12 +1,17 @@
 'use strict';
 
+var username = "test_user";
+var password = "1234567890";
+
 self.addEventListener('push', function(event) {
   console.log('Received a push message', event);
   
-  self.registration.pushManager.getSubscription().then(function(subscription) {
-    console.log("got subscription id: ", subscription.endpoint);
-    var subscriptionid = subscription.endpoint.split("/").slice(-1);
-  });
+  // Subscription ID取得
+  //self.registration.pushManager.getSubscription().then(function(subscription) {
+  //  console.log("got subscription id: ", subscription.endpoint);
+  //  var subscriptionid = subscription.endpoint.split("/").slice(-1);
+  //});
+  getList();
   var title = 'Yay a message.';
   var body = 'We have received a push message.';
   var icon = '/images/icon-192x192.png';
@@ -18,19 +23,53 @@ self.addEventListener('push', function(event) {
         throw new Error();
       }
       return response.json().then(function(data) {
-  
         self.registration.showNotification(data.title, {
           body: data.message,
           icon: icon,
           tag: tag
         })
-  })
-  })
-
-
+      })
+    })
   );
 });
 
+function getList() {
+  KiiUser.authenticate(username, password, {
+    // Called on successful authentication
+    success: function(theUser) {
+        var bucket = Kii.bucketWithName("test_bucket");
+        // Build "all" query
+        var all_query = KiiQuery.queryWithClause();
+
+        // Define the callbacks
+        var queryCallbacks = {
+          success: function(queryPerformed, resultSet, nextQuery) {
+            // ulタグを生成してinsertに追加
+            var insert = $('<ul>').addClass('list');
+            for(var i=0; i < resultSet.length; i++) {
+              var id = resultSet[i].get("subscriptionId");
+            }
+            if(nextQuery != null) {
+              // There are more results (pages).
+              // Execute the next query to get more results.
+             bucket.executeQuery(nextQuery, queryCallbacks);
+            }
+          },
+          failure: function(queryPerformed, anErrorString) {
+            // do something with the error response
+          }
+        }
+        // Execute the query
+        bucket.executeQuery(all_query, queryCallbacks);
+      });
+    },
+    // Called on a failed authentication
+    failure: function(theUser, errorString) {
+      // Print some info to the log
+      console.log("Error authenticating: " + errorString);
+    }
+  })
+}
 
 self.addEventListener('notificationclick', function(event) {
   console.log('On notification click: ', event.notification.tag);
