@@ -14,7 +14,9 @@ self.addEventListener('push', function(event) {
   //  var subscriptionid = subscription.endpoint.split("/").slice(-1);
   //});
   event.waitUntil(
-    getList();
+    function() {
+      getList();
+    }
   );
   var title = 'Yay a message.';
   var body = 'We have received a push message.';
