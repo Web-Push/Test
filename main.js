@@ -57,7 +57,7 @@ function showCurlCommand(mergedEndpoint) {
   var endpointSections = mergedEndpoint.split('/');
   var subscriptionId = endpointSections[endpointSections.length - 1];
 
-  var curlCommand = 'curl --header "Authorization: key=' + API_KEY +
+  var curlCommand = 'curl -x http://192.168.0.15:3128 -L --header "Authorization: key=' + API_KEY +
     '" --header Content-Type:"application/json" ' + GCM_ENDPOINT +
     ' -d "{\\"registration_ids\\":[\\"' + subscriptionId + '\\"]}"';
 
