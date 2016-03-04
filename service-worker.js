@@ -1,5 +1,7 @@
 'use strict';
 
+importScripts("https://web-push.github.io/Test/js/KiiSDK.js");
+
 var username = "test_user";
 var password = "1234567890";
 
