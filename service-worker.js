@@ -7,7 +7,7 @@ var password = "1234567890";
 
 self.addEventListener('push', function(event) {
   console.log('Received a push message', event);
-  
+  Kii.initializeWithSite("5a2ac7b1", "1bc385a570612507bb8740ba861b14cb", KiiSite.JP);
   // Subscription ID取得
   //self.registration.pushManager.getSubscription().then(function(subscription) {
   //  console.log("got subscription id: ", subscription.endpoint);
