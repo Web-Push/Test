@@ -13,8 +13,13 @@ self.addEventListener('push', function(event) {
   //  console.log("got subscription id: ", subscription.endpoint);
   //  var subscriptionid = subscription.endpoint.split("/").slice(-1);
   //});
-      
 
+  event.waitUntil(
+    getList().then(function() {
+      console.log('hoge');
+    })
+  );
+  
   var title = 'Yay a message.';
   var body = 'We have received a push message.';
   var icon = '/images/icon-192x192.png';
@@ -24,8 +29,6 @@ self.addEventListener('push', function(event) {
       if (response.status !== 200) {
         console.log('Looks like there was a problem. Status Code: ' + response.status);
         throw new Error();
-      } else {
-        getList();
       }
       return response.json().then(function(data) {
         self.registration.showNotification(data.title, {
