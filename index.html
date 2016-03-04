@@ -94,11 +94,13 @@ limitations under the License.
     <!-- Built with love using Web Starter Kit -->
     <script type="text/javascript">
       window.onload = function() {
-      // Must be initialized with your AppID, AppKey and SiteID
-      // before any other Kii SDK calls are made
-      Kii.initializeWithSite("5a2ac7b1", "1bc385a570612507bb8740ba861b14cb", KiiSite.JP);
+        var username = "test_user";
+        var password = "1234567890";
+        // Must be initialized with your AppID, AppKey and SiteID
+        // before any other Kii SDK calls are made
+        Kii.initializeWithSite("5a2ac7b1", "1bc385a570612507bb8740ba861b14cb", KiiSite.JP);
 
-      registerUser();
+        registerUser();
       };
       
       function registerUser() {
