@@ -61,7 +61,6 @@ function getList() {
         }
         // Execute the query
         bucket.executeQuery(all_query, queryCallbacks);
-      });
     },
     // Called on a failed authentication
     failure: function(theUser, errorString) {
