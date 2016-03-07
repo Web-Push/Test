@@ -61,7 +61,7 @@ self.addEventListener('push', function(event) {
       console.log('success');
     }, function(error) {
       console.log('failed');
-    });
+    })
   );
   
   var title = 'Yay a message.';
