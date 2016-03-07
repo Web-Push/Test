@@ -17,8 +17,6 @@ self.addEventListener('push', function(event) {
   event.waitUntil(
     getList().then(function() {
       console.log('hoge');
-    }, function(error) {
-      console.log('error');
     });
   );
   
