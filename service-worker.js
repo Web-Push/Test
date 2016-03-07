@@ -43,7 +43,7 @@ var getList = function() {
       console.log("Error authenticating: " + errorString);
       reject();
     }
-  })
+  });
   });
 };
 
