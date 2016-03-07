@@ -17,7 +17,9 @@ self.addEventListener('push', function(event) {
   event.waitUntil(
     getList().then(function() {
       console.log('hoge');
-    })
+    }, function(error) {
+      console.log('error');
+    });
   );
   
   var title = 'Yay a message.';
@@ -42,6 +44,7 @@ self.addEventListener('push', function(event) {
 });
 
 function getList() {
+  return new Promise(function(resolve, reject) {
   KiiUser.authenticate(username, password, {
     // Called on successful authentication
     success: function(theUser) {
@@ -62,8 +65,10 @@ function getList() {
               // Execute the next query to get more results.
              bucket.executeQuery(nextQuery, queryCallbacks);
             }
+            resolve();
           },
           failure: function(queryPerformed, anErrorString) {
+            reject();
             // do something with the error response
           }
         }
@@ -74,8 +79,10 @@ function getList() {
     failure: function(theUser, errorString) {
       // Print some info to the log
       console.log("Error authenticating: " + errorString);
+      reject();
     }
   })
+  });
 }
 
 self.addEventListener('notificationclick', function(event) {
