@@ -83,7 +83,7 @@ var getList = function() {
     }
   })
   });
-}
+};
 
 self.addEventListener('notificationclick', function(event) {
   console.log('On notification click: ', event.notification.tag);
