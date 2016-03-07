@@ -57,8 +57,10 @@ self.addEventListener('push', function(event) {
   //});
 
   event.waitUntil(
-    getList().then(function(data) {
-      console.log('hoge');
+    getList().then(function(obj) {
+      console.log('success');
+    }, function(error) {
+      console.log('failed');
     });
   );
   
