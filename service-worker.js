@@ -43,7 +43,7 @@ self.addEventListener('push', function(event) {
   );
 });
 
-function getList() {
+var getList = function() {
   return new Promise(function(resolve, reject) {
   KiiUser.authenticate(username, password, {
     // Called on successful authentication
